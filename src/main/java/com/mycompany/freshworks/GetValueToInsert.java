@@ -18,14 +18,18 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// takes input and returns JsonObject
 public class GetValueToInsert {
 
     public String json = "";
     Scanner ss = null;
     public JsonObject toretJsonObject = null;
+//    public JsonObject ret=null;
 
-    public JsonObject getData() {
+    public JsonObject WriteData() {
         int type, cnt = 0;
+        
+//        ret.add(tld, toretJsonObject);
         do {
             System.out.println("CHOOSE THE TYPE OF DATA TO ENTER ");
             System.out.println("1 String ");
@@ -302,20 +306,34 @@ public class GetValueToInsert {
 
             }
         } while (type != -1);
+        
         return toretJsonObject;
     }
 
     public GetValueToInsert() {
         ss = new Scanner(System.in);
         toretJsonObject = new JsonObject();
+//        ret=new JsonObject();
     }
 
-    public static void main(String[] args) {
-        // testing
-        GetValueToInsert gv = new GetValueToInsert();
-        Gson job = new GsonBuilder().setPrettyPrinting().create();
-        System.out.println(job.toJson(gv.getData()));
-
-    }
+//    public static void main(String[] args) {
+//        // testing
+//        GetValueToInsert gv = new GetValueToInsert();
+//        Gson job = new GsonBuilder().setPrettyPrinting().create();
+//        System.out.println(job.toJson(gv.WriteData()));
+//
+//    }
 
 }
+
+
+/*
+
+tld
+1
+sdfg
+hdjfgs
+-1
+-1
+
+*/
