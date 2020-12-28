@@ -91,7 +91,6 @@ public class FileStorageReader {
         cal = Calendar.getInstance();
         hashmap = new HashMap<>();
         main = parse();
-//        kt = new ArrayList<>();
         keys = new ArrayList<>(main.keySet());
         setKeyData();
 
@@ -106,7 +105,6 @@ public class FileStorageReader {
         hashmap = new HashMap<>();
 
         main = parse();
-//        kt = new ArrayList<>();
         keys = new ArrayList<>(main.keySet());
         setKeyData();
 
@@ -117,7 +115,7 @@ public class FileStorageReader {
         for (int i = 0; i < keys.size(); i++) {
             Key_time temp = new Key_time(keys.get(i).split("---")[0], Long.parseLong(keys.get(i).split("---")[1]), keys.get(i));
             if (temp.key.equals(key)) {
-                System.out.println(key+" "+temp.key);
+                System.out.println(key + " " + temp.key);
                 if (temp.time >= time || temp.time == 0) {
                     ret = new Key_time(key, temp.time, temp.id);
                     return ret;
@@ -164,9 +162,10 @@ public class FileStorageReader {
     }
 
     public void printAllDataInStore() {
+        
         for (int i = 0; i < keys.size(); i++) {
             Key_time temp = new Key_time(keys.get(i).split("---")[0], Long.parseLong(keys.get(i).split("---")[1]), keys.get(i));
-            System.out.println(gson.toJson(hashmap.get(keys)));
+            System.out.println(gson.toJson(hashmap.get(temp)));
         }
     }
 
@@ -215,12 +214,13 @@ public class FileStorageReader {
 
     public boolean deleteKeyValue(String key) {
         Key_time del = find(key, 0);
-        System.out.println("loc "+loc);
+        System.out.println("loc " + loc);
         if (del != null) {
-            System.out.println("string key not null");
+//            System.out.println("string key not null");
 //            System.out.println(gson.toJson(hashmap.get(loc)));
-            System.out.println("remove by string key ");
+//            System.out.println("remove by string key ");
             System.out.println(gson.toJson(main.remove(del.id)));
+            hashmap.remove(del);
             try (FileWriter file = new FileWriter(CUSTOM_PATH + "\\" + "temp2.json")) {
                 gson.toJson(main, file);
             } catch (Exception e) {
@@ -234,10 +234,9 @@ public class FileStorageReader {
     public boolean deleteKeyValue(Key_time key) {
         System.out.println("remove by key_time");
         System.out.println(gson.toJson(main.remove(key.id)));
+        hashmap.remove(key);
         try (FileWriter file = new FileWriter(CUSTOM_PATH + "\\" + "temp2.json")) {
-
             gson.toJson(main, file);
-
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -297,16 +296,21 @@ public class FileStorageReader {
         // testing
         FileStorageReader fsr = new FileStorageReader("lap-id");
         Calendar cal = Calendar.getInstance();
+        fsr.printAllDataInStore();
+        System.out.println("DELTE 1");
+        fsr.deleteKeyValue("key2");
+        System.out.println("DELTE 2");
+        fsr.deleteKeyValue("key3");
+        System.out.println("final asdlkhlkdf print");
+        fsr.printAllDataInStore();
 //        System.out.println(cal.getTimeInMillis());
 //        System.out.println(fsr.returnJSONValue("key2", cal.getTimeInMillis()));
 //        System.out.println(fsr.returnJSONValue("asdfsdf", cal.getTimeInMillis()));
 //        System.out.println(fsr.returnJSONValue("key---1609100985702"));
 //        fsr.WriteToJson();
-        fsr.deleteKeyValue("key2");
-        fsr.deleteKeyValue("key3");
+
 //        fsr.printAllDataInStore();
 //        fsr.deleteKeyValue("key1", 0,1);
-//        fsr.printAllDataInStore();
     }
 }
 
