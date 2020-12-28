@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+ 
 // takes input and returns JsonObject
 public class GetValueToInsert {
 
@@ -313,16 +313,15 @@ public class GetValueToInsert {
     public GetValueToInsert() {
         ss = new Scanner(System.in);
         toretJsonObject = new JsonObject();
-//        ret=new JsonObject();
     }
 
-//    public static void main(String[] args) {
-//        // testing
-//        GetValueToInsert gv = new GetValueToInsert();
-//        Gson job = new GsonBuilder().setPrettyPrinting().create();
-//        System.out.println(job.toJson(gv.WriteData()));
-//
-//    }
+    public static void main(String[] args) {
+        // testing
+        GetValueToInsert gv = new GetValueToInsert();
+        Gson job = new GsonBuilder().setPrettyPrinting().create();
+        System.out.println(job.toJson(gv.WriteData()));
+
+    }
 
 }
 

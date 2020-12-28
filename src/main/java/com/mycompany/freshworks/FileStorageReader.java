@@ -12,17 +12,12 @@ package com.mycompany.freshworks;
 import com.google.gson.Gson;
 import com.google.gson.*;
 import java.io.*;
-
+//import java.util.concurrent.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.mycompany.freshworks.GetValueToInsert;
 
 import java.util.*;
-
-class jsonStructure {
-
-    private String lapid;
-}
 
 class Key_time {
 
@@ -34,6 +29,13 @@ class Key_time {
         this.key = key;
         this.time = time;
         this.id = id;
+    }
+
+    public Key_time(String superKey) {
+        String arr[] = superKey.split("---");
+        this.key = arr[0];
+        this.time = Long.parseLong(arr[1]);
+        this.id = superKey;
     }
 
     public boolean equals(Object obj) {
@@ -70,6 +72,7 @@ public class FileStorageReader {
     Scanner ss = null;
     ArrayList<String> keys = null;
     HashMap<Key_time, JsonObject> hashmap = null;
+//    ConcurrentHashMap<Key_time, JsonObject> hashmap = null;
 
     JsonObject main = null;
     Key_time loc = null;
@@ -90,6 +93,7 @@ public class FileStorageReader {
         gson = new GsonBuilder().setPrettyPrinting().create();
         cal = Calendar.getInstance();
         hashmap = new HashMap<>();
+//        hashmap = new ConcurrentHashMap<>();
         main = parse();
         keys = new ArrayList<>(main.keySet());
         setKeyData();
@@ -120,6 +124,7 @@ public class FileStorageReader {
                     ret = new Key_time(key, temp.time, temp.id);
                     return ret;
                 } else if (temp.time < time) {
+                    System.out.println("KEY EXPIRED");
                     ret = new Key_time(key, temp.time, temp.id);
                     System.out.println(ret);
                     System.out.println("delete called");
@@ -162,7 +167,7 @@ public class FileStorageReader {
     }
 
     public void printAllDataInStore() {
-        
+
         for (int i = 0; i < keys.size(); i++) {
             Key_time temp = new Key_time(keys.get(i).split("---")[0], Long.parseLong(keys.get(i).split("---")[1]), keys.get(i));
             System.out.println(gson.toJson(hashmap.get(temp)));
@@ -209,7 +214,8 @@ public class FileStorageReader {
             System.out.println("KEY VALUE HAS EXPIRED");
         }
 
-        return "KEY DOESN'T EXIST";
+//        return "KEY DOESN'T EXIST";
+        return "works good";
     }
 
     public boolean deleteKeyValue(String key) {
@@ -221,6 +227,7 @@ public class FileStorageReader {
 //            System.out.println("remove by string key ");
             System.out.println(gson.toJson(main.remove(del.id)));
             hashmap.remove(del);
+            keys.remove(del.id);
             try (FileWriter file = new FileWriter(CUSTOM_PATH + "\\" + "temp2.json")) {
                 gson.toJson(main, file);
             } catch (Exception e) {
@@ -235,6 +242,7 @@ public class FileStorageReader {
         System.out.println("remove by key_time");
         System.out.println(gson.toJson(main.remove(key.id)));
         hashmap.remove(key);
+        keys.remove(key.id);
         try (FileWriter file = new FileWriter(CUSTOM_PATH + "\\" + "temp2.json")) {
             gson.toJson(main, file);
         } catch (Exception e) {
@@ -281,9 +289,18 @@ public class FileStorageReader {
 
             JsonObject tojson = new JsonObject();
             GetValueToInsert response = new GetValueToInsert();
-            JsonObject enter = response.WriteData();
-            tojson.add(tld, enter);// key+value newly created
-            System.out.println(gson.toJson(tojson));
+            JsonObject enter = response.WriteData();// user needs to enter data in CLI
+            main.add(tld, enter);// key+value newly created
+
+            hashmap.put(new Key_time(tld), enter);
+            keys.add(tld);
+            System.out.println(gson.toJson(main));
+            try (FileWriter file = new FileWriter(CUSTOM_PATH + "\\" + "temp2.json")) {
+                gson.toJson(main, file);
+                System.out.println("UPDATED JSON FILE ");
+            } catch (Exception e) {
+                System.out.println("file handle exception during writing" + e);
+            }
 
         } catch (Exception e) {
             System.out.println(e);
@@ -296,18 +313,18 @@ public class FileStorageReader {
         // testing
         FileStorageReader fsr = new FileStorageReader("lap-id");
         Calendar cal = Calendar.getInstance();
-        fsr.printAllDataInStore();
-        System.out.println("DELTE 1");
-        fsr.deleteKeyValue("key2");
-        System.out.println("DELTE 2");
-        fsr.deleteKeyValue("key3");
-        System.out.println("final asdlkhlkdf print");
-        fsr.printAllDataInStore();
+//        System.out.println(fsr.returnJSONValue("key1", cal.getTimeInMillis()));
+//        fsr.printAllDataInStore();
+//        System.out.println("DELTE 1");
+//        fsr.deleteKeyValue("key2");
+//        System.out.println("DELTE 2");
+//        fsr.deleteKeyValue("key3");
+//        System.out.println("final asdlkhlkdf print");
+//        fsr.printAllDataInStore();
 //        System.out.println(cal.getTimeInMillis());
-//        System.out.println(fsr.returnJSONValue("key2", cal.getTimeInMillis()));
 //        System.out.println(fsr.returnJSONValue("asdfsdf", cal.getTimeInMillis()));
 //        System.out.println(fsr.returnJSONValue("key---1609100985702"));
-//        fsr.WriteToJson();
+        fsr.WriteToJson();
 
 //        fsr.printAllDataInStore();
 //        fsr.deleteKeyValue("key1", 0,1);
