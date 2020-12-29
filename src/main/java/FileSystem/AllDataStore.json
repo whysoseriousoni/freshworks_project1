@@ -1,0 +1,12 @@
+{
+    "file1": {
+        "location": "FileSystem\temp.json",
+        "used": false,
+        "client_id": 0
+    },
+    "file2": {
+        "location": "FileSystem\temp2.json",
+        "used": false,
+        "client_id": 0
+    }
+}
