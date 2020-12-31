@@ -11,6 +11,7 @@ package com.mycompany.freshworks;
  */
 import com.google.gson.Gson;
 import com.google.gson.*;
+
 import java.io.*;
 //import java.util.concurrent.*;
 import java.nio.file.Path;
@@ -64,7 +65,7 @@ class Key_time {
         return this.key + "---" + this.time + "\n";
     }
 }
-
+/*
 public class FileStorageReader {
 
     Calendar cal = null;
@@ -316,7 +317,7 @@ public class FileStorageReader {
 //        System.out.println(fsr.returnJSONValue("key1", cal.getTimeInMillis()));
 //        fsr.printAllDataInStore();
 //        System.out.println("DELTE 1");
-//        fsr.deleteKeyValue("key2");
+        fsr.deleteKeyValue("key2");
 //        System.out.println("DELTE 2");
 //        fsr.deleteKeyValue("key3");
 //        System.out.println("final asdlkhlkdf print");
@@ -330,6 +331,7 @@ public class FileStorageReader {
 //        fsr.deleteKeyValue("key1", 0,1);
     }
 }
+*/
 
 
 /*

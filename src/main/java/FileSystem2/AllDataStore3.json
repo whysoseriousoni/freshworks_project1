@@ -1,0 +1,57 @@
+{
+    "file1": {
+        "used": true,
+        "location": "C:\\Users\\WhysoseriousONI\\Documents\\NetBeansProjects\\Freshworks\\src\\main\\java\\FileSystem\\temp.json",
+        "client_id": "Client ID"
+    },
+    "file2": {
+        "used": true,
+        "location": "C:\\Users\\WhysoseriousONI\\Documents\\NetBeansProjects\\Freshworks\\src\\main\\java\\FileSystem\\temp2.json",
+        "client_id": "Client ID2"
+    },
+    "jLabel3": {
+        "used": true,
+        "location": "C://Users//WhysoseriousONI//Desktop//asd.json",
+        "client_id": "Client ID"
+    },
+    "asdd": {
+        "location": "C://Users//WhysoseriousONI//Desktop//asdd.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "testd1": {
+        "location": "C://Users//WhysoseriousONI//Desktop//test.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "jTextField1": {
+        "location": "C://Users//WhysoseriousONI//Documents//NetBeansProjects//Freshworks//src//main//java//FileSystem//jTextField1.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "jTextField2": {
+        "location": "C://Users//WhysoseriousONI//Documents//NetBeansProjects//Freshworks//src//main//java//FileSystem//jTextField2.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "text": {
+        "location": "G://downloads//test.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "cdd": {
+        "location": "C://Users//WhysoseriousONI//Documents//NetBeansProjects//Freshworks//src//main//java//FileSystem//cdd.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "cd": {
+        "location": "C://Users//WhysoseriousONI//Documents//NetBeansProjects//Freshworks//src//main//java//FileSystem//cd.json",
+        "used": false,
+        "client_id": "0"
+    },
+    "test2": {
+        "used": true,
+        "location": "C://Users//WhysoseriousONI//Documents//NetBeansProjects//Freshworks//src//main//java//FileSystem//test2.json",
+        "client_id": "Client ID"
+    }
+}
